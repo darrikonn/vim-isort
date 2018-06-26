@@ -17,8 +17,13 @@ endif
 
 AvailablePython <<EOF
 from __future__ import print_function
-import vim
+
+from functools import lru_cache
+from subprocess import check_output, CalledProcessError
 from sys import version_info
+
+import vim
+
 
 try:
     from isort import SortImports
@@ -37,6 +42,16 @@ def count_blank_lines_at_end(lines):
     return blank_lines
 
 
+@lru_cache(maxsize=1)
+def get_git_project_path():
+    ''' returns the absolute path of the repository root '''
+    try:
+        base = check_output('git rev-parse --show-toplevel', shell=True)
+    except CalledProcessError:
+        return None
+    return base.decode('utf-8').strip()
+
+
 def isort(text_range):
     if not isort_imported:
         print("No isort python module detected, you should install it. More info at https://github.com/darrikonn/vim-isort")
@@ -44,7 +59,8 @@ def isort(text_range):
 
     blank_lines_at_end = count_blank_lines_at_end(text_range)
     old_text = '\n'.join(text_range)
-    new_text = SortImports(file_contents=old_text).output
+    settings_path=get_git_project_path()
+    new_text = SortImports(file_contents=old_text, settings_path=settings_path).output
     new_lines = new_text.split('\n')
 
     # remove empty lines wrongfully added
