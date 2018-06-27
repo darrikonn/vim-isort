@@ -35,7 +35,7 @@ Setup
 
 * First you need to allow vim to keep you in the root inside your repo, regardless of where you open your file
 
-.. code::
+.. code-block:: viml
 
     " CWD to the root of git repo when opening file inside repo
     let g:gitroot=system("git rev-parse --show-toplevel")
@@ -59,16 +59,12 @@ Or disable the mapping with this:
 
 You can also specify a particular Python version, so if `isort` is installed under Python 3:
 
-.. code-block:: viml
-
-    let g:vim_isort_python_version = 'python3'
-
 Troubleshooting?
 ============
 Your virtual environment might confuse the configuration path, which results in your repo based isort configuration not working (even though it's loaded).
 The fix is to tell isort the name of your virtual environment directory in either `.isort.cfg` or `setup.cfg`:
 
-.. code::
+.. code-block::
 
     virtual_env = venv
     not_skip = __init__.py
