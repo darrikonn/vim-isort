@@ -64,7 +64,7 @@ Troubleshooting?
 Your virtual environment might confuse the configuration path, which results in your repo based isort configuration not working (even though it's loaded).
 The fix is to tell isort the name of your virtual environment directory in either `.isort.cfg` or `setup.cfg`:
 
-.. code-block::
+.. code-block:: cfg
 
     virtual_env = venv
     not_skip = __init__.py
