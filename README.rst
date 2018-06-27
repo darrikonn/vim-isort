@@ -30,6 +30,18 @@ Installation
 
 (Or if you don't use any plugin manager, you can just copy the ``python_vimisort.vim`` file to your ``.vim/ftplugin`` folder)
 
+Setup
+============
+
+* First you need to allow vim to keep you in the root inside your repo, regardless of where you open your file
+
+.. code::
+
+    " CWD to the root of git repo when opening file inside repo
+    let g:gitroot=system("git rev-parse --show-toplevel")
+    let g:is_gitrepo = v:shell_error == 0
+    silent! cd `=gitroot`
+
 Configuration
 =============
 
@@ -50,3 +62,13 @@ You can also specify a particular Python version, so if `isort` is installed und
 .. code-block:: viml
 
     let g:vim_isort_python_version = 'python3'
+
+Troubleshooting?
+============
+Your virtual environment might confuse the configuration path, which results in your repo based isort configuration not working (even though it's loaded).
+The fix is to tell isort the name of your virtual environment directory in either `.isort.cfg` or `setup.cfg`:
+
+.. code::
+
+    virtual_env = venv
+    not_skip = __init__.py
