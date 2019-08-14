@@ -23,6 +23,7 @@ from subprocess import check_output, CalledProcessError
 from sys import version_info
 
 import vim
+from pathlib import Path
 
 
 try:
@@ -43,13 +44,13 @@ def count_blank_lines_at_end(lines):
 
 
 @lru_cache(maxsize=1)
-def get_git_project_path():
-    ''' returns the absolute path of the repository root '''
-    try:
-        base = check_output('git rev-parse --show-toplevel', shell=True)
-    except CalledProcessError:
+def get_isort_config(path):
+    if str(path) == "/":
         return None
-    return base.decode('utf-8').strip()
+    elif Path(f"{path}/setup.cfg").exists() or Path(f"{path}/.isort.cfg").exists():
+        return path
+    return get_isort_config(path.parent)
+  
 
 
 def isort(text_range):
@@ -59,7 +60,7 @@ def isort(text_range):
 
     blank_lines_at_end = count_blank_lines_at_end(text_range)
     old_text = '\n'.join(text_range)
-    settings_path=get_git_project_path()
+    settings_path=get_isort_config(Path(text_range.name))
     new_text = SortImports(file_contents=old_text, settings_path=settings_path).output
     new_lines = new_text.split('\n')
 
