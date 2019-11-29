@@ -35,7 +35,11 @@ Installation
 
     pip3 install isort
 
-* Add the plugin to vim using `Vundle <https://github.com/gmarik/vundle>`_ or any other plugin manager, pointing to this repo:
+* Add the plugin using your favourite package manager, e.g.:
+
+.. code::
+
+    Plug 'darrikonn/vim-isort'
 
 .. code::
 
