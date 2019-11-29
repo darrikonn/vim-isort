@@ -20,7 +20,7 @@ Installation
 
 .. code::
 
-    pip install isort
+    pip3 install isort
 
 * Add the plugin to vim using `Vundle <https://github.com/gmarik/vundle>`_ or any other plugin manager, pointing to this repo:
 
@@ -56,8 +56,6 @@ Or disable the mapping with this:
 .. code-block:: viml
 
     let g:vim_isort_map = ''
-
-You can also specify a particular Python version, so if `isort` is installed under Python 3:
 
 Troubleshooting?
 ============
