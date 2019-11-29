@@ -45,22 +45,22 @@ def count_blank_lines_at_end(lines):
 
 
 @lru_cache(maxsize=1)
-def get_isort_config(path):
+def _get_isort_config(path):
     if str(path) == "/":
         return None
     elif Path(f"{path}/setup.cfg").exists() or Path(f"{path}/.isort.cfg").exists():
         return path
-    return get_isort_config(path.parent)
+    return _get_isort_config(path.parent)
 
 
-def isort(text_range):
+def _isort(text_range):
     if not isort_imported:
         print(
             "No isort python module detected, you should install it. More info at https://github.com/darrikonn/vim-isort"
         )
         return
 
-    settings_path = get_isort_config(Path(text_range.name))
+    settings_path = _get_isort_config(Path(text_range.name))
     config = settings.from_path(settings_path)
     config_overrides = {}
     if "virtual_env" in config:
@@ -83,10 +83,10 @@ def isort(text_range):
 
 
 def isort_file():
-    isort(vim.current.buffer)
+    _isort(vim.current.buffer)
 
 
 def isort_visual():
-    isort(vim.current.range)
+    _isort(vim.current.range)
 
 EOF
