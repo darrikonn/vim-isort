@@ -3,11 +3,19 @@ vim-isort
 
 Vim plugin to sort python imports using `isort <https://github.com/timothycrosley/isort>`_
 
-How https://github.com/darrikonn/vim-isort differs from https://github.com/fisadev/vim-isort:
-* darrikonn/vim-isort works with https://github.com/airblade/vim-rooter
-* darrikonn/vim-isort works with monorepos + with/without https://github.com/airblade/vim-rooter
-* darrikonn/vim-isort works with nested isort configurations
 
+
+**NOTE**:
+
+`darrikonn/vim-isort <https://github.com/darrikonn/vim-isort>`_ is a fork from `fisadev/vim-isort <https://github.com/fisadev/vim-isort>`_. The base logic is the same, with small additional changes/features.
+
+----
+
+How `darrikonn/vim-isort <https://github.com/darrikonn/vim-isort>`_ differs from  `fisadev/vim-isort <https://github.com/fisadev/vim-isort>`_:
+
+    - *darrikonn/vim-isort* works with `vim-rooter <https://github.com/airblade/vim-rooter>`_.
+    - *darrikonn/vim-isort* works with **monorepos** + with/without `vim-rooter <https://github.com/airblade/vim-rooter>`_.
+    - *darrikonn/vim-isort* works with **nested isort configurations**.
 
 Usage
 =====
